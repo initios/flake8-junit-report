@@ -1,6 +1,3 @@
-from collections import defaultdict
-
-
 def _parse(file):
     lines = tuple(open(file, 'r'))
     parsed = []
