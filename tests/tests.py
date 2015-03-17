@@ -29,6 +29,7 @@ class ConvertTest(unittest.TestCase):
     def setUp(self):
         self.destination = os.path.join(output_dir, 'junit.xml')
 
+    def tearDown(self):
         try:
             os.remove(self.destination)
         except OSError:
