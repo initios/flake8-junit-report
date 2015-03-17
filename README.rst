@@ -12,18 +12,18 @@ Use it on your CI server to see the flake8 failures with ease.
 Usage
 -----
 Create your flake8 file as usual:
-.. code:: sheLl-session
+.. code:: shell-session
 
-    flake8 --output-file flake8.txt
+    $ flake8 --output-file flake8.txt
 
 Convert it to JUnit format:
-.. code:: sheLl-session
+.. code:: shell-session
 
-    junitConversor flake8.txt flake8_junit.xml
+    $ junitConversor flake8.txt flake8_junit.xml
 
 Running the tests
 -----
-.. code:: sheLl-session
+.. code:: shell-session
 
-    pip install -r requirements_dev.txt
-    tox
+    $ pip install -r requirements_dev.txt
+    $ tox
