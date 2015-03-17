@@ -1,10 +1,11 @@
 import os
 import unittest
 
-from junitConversor import _parse
+from junitConversor import _parse, _convert
 
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
+output_dir = os.path.join(current_dir, 'output')
 example_files_dir = os.path.join(current_dir, 'flake8_example_results')
 failed_flake8 = os.path.join(example_files_dir, 'failed_flake8.txt')
 valid_flake8 = os.path.join(example_files_dir, 'valid_flake8.txt')
@@ -22,3 +23,17 @@ class ParseTest(unittest.TestCase):
 
     def test_parsing_an_flake8_success_file_returns_an_empty_list(self):
         self.assertEqual([], _parse(valid_flake8))
+
+
+class ConvertTest(unittest.TestCase):
+    def setUp(self):
+        self.destination = os.path.join(output_dir, 'junit.xml')
+
+        try:
+            os.remove(self.destination)
+        except OSError:
+            pass
+
+    def test_can_convert_a_file_to_junit_xml(self):
+        _convert(failed_flake8, self.destination)
+        self.assertTrue(os.path.exists(self.destination), 'The xml file should exist')

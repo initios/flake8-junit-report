@@ -12,3 +12,7 @@ def _parse(file):
         })
 
     return parsed
+
+
+def _convert(origin, destination, delete_origin=False):
+    pass
