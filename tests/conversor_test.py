@@ -9,7 +9,7 @@ example_files_dir = os.path.join(current_dir, 'flake8_example_results')
 failed_flake8 = os.path.join(example_files_dir, 'failed_flake8.txt')
 
 
-class ConversorTest(unittest.TestCase):
+class ParseTest(unittest.TestCase):
     def test_can_parse_a_flake8_file(self):
         parsed = _parse(failed_flake8)
 
