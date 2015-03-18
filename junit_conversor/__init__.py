@@ -13,6 +13,7 @@ def _parse(file_name):
             'line': splitted[1].strip(),
             'col': splitted[2].strip(),
             'detail': splitted[3].strip(),
+            'code': splitted[3].strip()[:4]
         })
 
     return parsed
@@ -32,8 +33,14 @@ def _convert(origin, destination, delete_origin=False):
     testsuite.attrib["time"] = "1"
 
     for line in parsed:
-        ET.SubElement(testsuite, "testcase", file=line['file'],
-                      line=line['line'], col=line['col']).text = line['detail']
+        testcase = ET.SubElement(testsuite, "testcase", file=line['file'],
+                                 line=line['line'], col=line['col'])
+
+        # en type lo ideal seria poner el tipo de error (4 primeros digitos de detail)
+        # error_message = "{}"
+
+        ET.SubElement(testcase, "error",
+                      message=line['detail'], type="flake8").text = line['detail']
 
     tree = ET.ElementTree(testsuite)
     tree.write(destination, encoding='utf-8', xml_declaration=True)
