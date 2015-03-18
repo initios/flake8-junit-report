@@ -35,14 +35,13 @@ def _convert(origin, destination):
     testsuite.attrib["tests"] = str(len(parsed))
     testsuite.attrib["time"] = "1"
 
-    for line in parsed:
-        # todo
-        # Mover file, line, col, etc a testcase y quitar de testsuite
-        testcase = ET.SubElement(testsuite, "testcase", file=line['file'],
-                                 line=line['line'], col=line['col'])
+    for file_name, errors in parsed.items():
+        testcase = ET.SubElement(testsuite, "testcase", name=file_name)
 
-        ET.SubElement(testcase, "error", message=line['detail'],
-                      type="flake8 %s" % line['code']).text = line['detail']
+        for error in errors:
+            ET.SubElement(testcase, "error", file=error['file'], line=error['line'], col=error['col'],
+                          message=error['detail'], type="flake8 %s" % error['code']) \
+                          .text = "{}:{} {}".format(error['line'], error['col'], error['detail'])
 
     tree = ET.ElementTree(testsuite)
     tree.write(destination, encoding='utf-8', xml_declaration=True)
