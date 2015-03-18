@@ -21,7 +21,7 @@ Convert it to JUnit format:
 
 .. code:: shell-session
 
-    $ junitConversor flake8.txt flake8_junit.xml
+    $ junit_conversor flake8.txt flake8_junit.xml
 
 Running the tests
 -----
