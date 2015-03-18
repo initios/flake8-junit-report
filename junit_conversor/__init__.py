@@ -36,11 +36,8 @@ def _convert(origin, destination, delete_origin=False):
         testcase = ET.SubElement(testsuite, "testcase", file=line['file'],
                                  line=line['line'], col=line['col'])
 
-        # en type lo ideal seria poner el tipo de error (4 primeros digitos de detail)
-        # error_message = "{}"
-
-        ET.SubElement(testcase, "error",
-                      message=line['detail'], type="flake8").text = line['detail']
+        ET.SubElement(testcase, "error", message=line['detail'],
+                      type="flake8 %s" % line['code']).text = line['detail']
 
     tree = ET.ElementTree(testsuite)
     tree.write(destination, encoding='utf-8', xml_declaration=True)
