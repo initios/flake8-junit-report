@@ -7,9 +7,6 @@ def _parse(file_name):
     parsed = []
 
     for line in lines:
-        print("antes")
-        print(file_name)
-        print(line)
         splitted = line.split(":")
         parsed.append({
             'file': splitted[0].strip(),
