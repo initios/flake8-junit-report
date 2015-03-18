@@ -2,8 +2,8 @@ import os
 import xml.etree.cElementTree as ET
 
 
-def _parse(file):
-    lines = tuple(open(file, 'r'))
+def _parse(file_name):
+    lines = tuple(open(file_name, 'r'))
     parsed = []
 
     for line in lines:
