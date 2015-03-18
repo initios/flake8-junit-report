@@ -9,4 +9,9 @@ def main(flake8_file, destination_file, delete_source_file=False):
 
 
 if __name__ == '__main__':
+    args = sys.argv
+
+    # The first argument is the junit_conversor binary itself
+    args = args.pop(0)
+
     main(*sys.argv)
