@@ -41,7 +41,7 @@ def _convert(origin, destination):
         testcase = ET.SubElement(testsuite, "testcase", name=file_name)
 
         for error in errors:
-            ET.SubElement(testcase, "error", file=error['file'], line=error['line'], col=error['col'],
+            ET.SubElement(testcase, "failure", file=error['file'], line=error['line'], col=error['col'],
                           message=error['detail'], type="flake8 %s" % error['code']) \
                           .text = "{}:{} {}".format(error['line'], error['col'], error['detail'])
 
