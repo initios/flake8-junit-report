@@ -33,6 +33,8 @@ def _convert(origin, destination, delete_origin=False):
     testsuite.attrib["time"] = "1"
 
     for line in parsed:
+        # todo
+        # Mover file, line, col, etc a testcase y quitar de testsuite
         testcase = ET.SubElement(testsuite, "testcase", file=line['file'],
                                  line=line['line'], col=line['col'])
 
