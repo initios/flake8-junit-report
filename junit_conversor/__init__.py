@@ -19,7 +19,7 @@ def _parse(file_name):
     return parsed
 
 
-def _convert(origin, destination, delete_origin=False):
+def _convert(origin, destination):
     parsed = _parse(origin)
 
     if len(parsed) < 1:
@@ -43,9 +43,3 @@ def _convert(origin, destination, delete_origin=False):
 
     tree = ET.ElementTree(testsuite)
     tree.write(destination, encoding='utf-8', xml_declaration=True)
-
-    if delete_origin:
-        try:
-            os.remove(destination)
-        except OSError:
-            pass
