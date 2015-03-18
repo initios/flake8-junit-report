@@ -1,24 +1,28 @@
 import os
 import xml.etree.cElementTree as ET
+from collections import defaultdict
 
 
 def _parse(file_name):
     lines = tuple(open(file_name, 'r'))
-    parsed = []
+    parsed = defaultdict(list)
 
     for line in lines:
         splitted = line.split(":")
-        parsed.append({
+        error = {
             'file': splitted[0].strip(),
             'line': splitted[1].strip(),
             'col': splitted[2].strip(),
             'detail': splitted[3].strip(),
-        })
+            'code': splitted[3].strip()[:4]
+        }
 
-    return parsed
+        parsed[error['file']].append(error)
+
+    return dict(parsed)
 
 
-def _convert(origin, destination, delete_origin=False):
+def _convert(origin, destination):
     parsed = _parse(origin)
 
     if len(parsed) < 1:
@@ -31,15 +35,13 @@ def _convert(origin, destination, delete_origin=False):
     testsuite.attrib["tests"] = str(len(parsed))
     testsuite.attrib["time"] = "1"
 
-    for line in parsed:
-        ET.SubElement(testsuite, "testcase", file=line['file'],
-                      line=line['line'], col=line['col']).text = line['detail']
+    for file_name, errors in parsed.items():
+        testcase = ET.SubElement(testsuite, "testcase", name=file_name)
+
+        for error in errors:
+            ET.SubElement(testcase, "error", file=error['file'], line=error['line'], col=error['col'],
+                          message=error['detail'], type="flake8 %s" % error['code']) \
+                          .text = "{}:{} {}".format(error['line'], error['col'], error['detail'])
 
     tree = ET.ElementTree(testsuite)
     tree.write(destination, encoding='utf-8', xml_declaration=True)
-
-    if delete_origin:
-        try:
-            os.remove(destination)
-        except OSError:
-            pass
