@@ -1,4 +1,3 @@
-import os
 import xml.etree.cElementTree as ET
 from collections import defaultdict
 
@@ -9,15 +8,18 @@ def _parse(file_name):
 
     for line in lines:
         splitted = line.split(":")
-        error = {
-            'file': splitted[0].strip(),
-            'line': splitted[1].strip(),
-            'col': splitted[2].strip(),
-            'detail': splitted[3].strip(),
-            'code': splitted[3].strip()[:4]
-        }
 
-        parsed[error['file']].append(error)
+        # Skip invalid lines
+        if len(splitted) == 4:
+            error = {
+                'file': splitted[0].strip(),
+                'line': splitted[1].strip(),
+                'col': splitted[2].strip(),
+                'detail': splitted[3].strip(),
+                'code': splitted[3].strip()[:4]
+            }
+
+            parsed[error['file']].append(error)
 
     return dict(parsed)
 
