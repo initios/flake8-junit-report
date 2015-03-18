@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from junitConversor import _parse, _convert
+from junit_conversor import _parse, _convert
 
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
