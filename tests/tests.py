@@ -1,5 +1,6 @@
 import os
 import unittest
+import xml.dom.minidom
 
 from junit_conversor import _parse, _convert
 
@@ -52,6 +53,18 @@ class ConvertTest(unittest.TestCase):
         except OSError:
             pass
 
+    def assertXmlIsValid(self, xml_file):
+        try:
+            with file(xml_file) as f:
+                content = f.read()
+
+            xml.dom.minidom.parseString(content)
+        except xml.parsers.expat.ExpatError:
+            raise Exception('The specified file is not a valid XML (%s)'
+                % content[0:30])
+
     def test_can_convert_a_file_to_junit_xml(self):
         _convert(failed_flake8, self.destination)
+
         self.assertTrue(os.path.exists(self.destination), 'The xml file should exist')
+        self.assertXmlIsValid(self.destination)
