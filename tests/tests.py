@@ -55,7 +55,7 @@ class ConvertTest(unittest.TestCase):
 
     def assertXmlIsValid(self, xml_file):
         try:
-            with file(xml_file) as f:
+            with open(xml_file) as f:
                 content = f.read()
 
             xml.dom.minidom.parseString(content)
