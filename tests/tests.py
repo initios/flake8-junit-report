@@ -14,7 +14,7 @@ valid_flake8 = os.path.join(example_files_dir, 'valid_flake8.txt')
 
 
 class ParseTest(unittest.TestCase):
-    def test_can_parse_a_flake8_file(self):
+    def test_should_parse_a_flake8_file_with_errors(self):
         parsed = _parse(failed_flake8)
 
         self.assertEqual(parsed, {
@@ -27,10 +27,10 @@ class ParseTest(unittest.TestCase):
             ]
         })
 
-    def test_parsing_an_flake8_success_file_returns_an_empty_list(self):
+    def test_should_return_an_empty_dict_when_parsing_a_flake8_success_file(self):
         self.assertEqual({}, _parse(valid_flake8))
 
-    def test_invalid_lines_are_skipped(self):
+    def test_should_skip_invalid_lines(self):
         parsed = _parse(failed_flake8_with_invalid_lines)
 
         self.assertEqual(parsed, {
@@ -63,8 +63,12 @@ class ConvertTest(unittest.TestCase):
             raise Exception('The specified file is not a valid XML (%s)'
                 % content[0:30])
 
-    def test_can_convert_a_file_to_junit_xml(self):
+    def test_should_convert_a_file_with_flake8_errors_to_junit_xml(self):
         _convert(failed_flake8, self.destination)
 
         self.assertTrue(os.path.exists(self.destination), 'The xml file should exist')
         self.assertXmlIsValid(self.destination)
+
+    def test_should_not_create_a_file_if_there_are_no_errors(self):
+        _convert(valid_flake8, self.destination)
+        self.assertFalse(os.path.exists(self.destination), 'The xml file should not exist')
