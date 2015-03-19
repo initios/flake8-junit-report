@@ -1,3 +1,4 @@
+import mock
 import os
 import unittest
 import xml.dom.minidom
@@ -72,3 +73,11 @@ class ConvertTest(unittest.TestCase):
     def test_should_not_create_a_file_if_there_are_no_errors(self):
         _convert(valid_flake8, self.destination)
         self.assertFalse(os.path.exists(self.destination), 'The xml file should not exist')
+
+
+class JunitConversorTest(unittest.TestCase):
+    @mock.patch('junit_conversor._parse')
+    @mock.patch('junit_conversor._convert')
+    def test_should_make_a_simple_conversion(self, _convert, _parse):
+        self.assertTrue(_convert.called, '_convert was not called')
+        self.assertTrue(_parse.called, '_parse was not called')
