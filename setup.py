@@ -39,9 +39,13 @@ setuptools.setup(
         'License :: OSI Approved :: BSD License',
     ],
 
-    packages=[
-        'junit_conversor',
+    py_modules=['junit_conversor.cli'],
+    install_requires=[
+        'Click',
     ],
-    include_package_data=True,
-    scripts=['bin/junit_conversor']
+    entry_points='''
+        [console_scripts]
+        nuevo=junit_conversor.cli:conversion
+    ''',
+
 )
