@@ -45,7 +45,7 @@ setuptools.setup(
     ],
     entry_points='''
         [console_scripts]
-        nuevo=junit_conversor.cli:conversion
+        junit_conversor=junit_conversor.cli:conversion
     ''',
 
 )
