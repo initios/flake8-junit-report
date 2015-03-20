@@ -1,17 +1,20 @@
-import mock
 import os
 import unittest
 import xml.dom.minidom
 
 from junit_conversor import _parse, _convert
+from scripttest import TestFileEnvironment
 
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
+project_root = os.path.join(current_dir, os.pardir)
 output_dir = os.path.join(current_dir, 'output')
 example_files_dir = os.path.join(current_dir, 'flake8_example_results')
 failed_flake8 = os.path.join(example_files_dir, 'failed_flake8.txt')
 failed_flake8_with_invalid_lines = os.path.join(example_files_dir, 'failed_flake8_with_invalid_lines.txt')
 valid_flake8 = os.path.join(example_files_dir, 'valid_flake8.txt')
+
+junit_conversor_cli = os.path.join(current_dir, os.pardir, 'bin', 'junit_conversor')
 
 
 class ParseTest(unittest.TestCase):
@@ -62,7 +65,7 @@ class ConvertTest(unittest.TestCase):
             xml.dom.minidom.parseString(content)
         except xml.parsers.expat.ExpatError:
             raise Exception('The specified file is not a valid XML (%s)'
-                % content[0:30])
+                            % content[0:30])
 
     def test_should_convert_a_file_with_flake8_errors_to_junit_xml(self):
         _convert(failed_flake8, self.destination)
@@ -76,8 +79,12 @@ class ConvertTest(unittest.TestCase):
 
 
 class JunitConversorTest(unittest.TestCase):
-    @mock.patch('junit_conversor._parse')
-    @mock.patch('junit_conversor._convert')
-    def test_should_make_a_simple_conversion(self, _convert, _parse):
-        self.assertTrue(_convert.called, '_convert was not called')
-        self.assertTrue(_parse.called, '_parse was not called')
+    def setUp(self):
+        self.env = TestFileEnvironment(os.path.join(output_dir, 'env'), cwd=project_root)
+
+    def test_should_make_a_simple_conversion(self):
+        result = self.env.run(junit_conversor_cli, failed_flake8, os.path.join(output_dir, 'env', 'result.xml'))
+
+        self.assertIn('result.xml', result.files_created)
+        self.assertEqual('Conversion done\n', result.stdout)
+        self.assertEqual(0, result.returncode)
