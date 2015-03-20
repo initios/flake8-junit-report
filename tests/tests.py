@@ -2,8 +2,9 @@ import os
 import unittest
 import xml.dom.minidom
 
+from click.testing import CliRunner
 from junit_conversor import _parse, _convert
-from scripttest import TestFileEnvironment
+from junit_conversor.cli import conversion
 
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
@@ -78,13 +79,12 @@ class ConvertTest(unittest.TestCase):
         self.assertFalse(os.path.exists(self.destination), 'The xml file should not exist')
 
 
-class JunitConversorTest(unittest.TestCase):
-    def setUp(self):
-        self.env = TestFileEnvironment(os.path.join(output_dir, 'env'), cwd=project_root)
+class JunitConversorCliTest(unittest.TestCase):
+    runner = CliRunner()
 
     def test_should_make_a_simple_conversion(self):
-        result = self.env.run(junit_conversor_cli, failed_flake8, os.path.join(output_dir, 'env', 'result.xml'))
+        with self.runner.isolated_filesystem():
+            result = self.runner.invoke(conversion, [failed_flake8, 'result.xml'])
 
-        self.assertIn('result.xml', result.files_created)
-        self.assertEqual('Conversion done\n', result.stdout)
-        self.assertEqual(0, result.returncode)
+            self.assertEqual(0, result.exit_code)
+            self.assertEqual('Conversion done\n', result.output)

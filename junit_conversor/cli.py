@@ -1,6 +1,5 @@
-#!/usr/bin/env python
 import click
-from junit_conversor import _convert
+from . import _convert
 
 
 @click.command()
@@ -11,8 +10,4 @@ def conversion(source, destination):
     Converts a flake8 file to junit
     """
     _convert(source, destination)
-    click.echo('Conversion done')
-
-
-if __name__ == '__main__':
-    conversion()
+    click.echo(click.style('Conversion done', fg='green'))

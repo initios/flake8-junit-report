@@ -1,4 +1,4 @@
 [run]
 branch = True
-include = junit_conversor/*, bin/junit_conversor
+include = junit_conversor/*
 omit = junit_conversor/__about__.py
