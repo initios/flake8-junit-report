@@ -43,3 +43,11 @@ Running the tests
 
     $ pip install -r requirements_dev.txt
     $ nosetests
+
+Contributions
+-------------
+.. _Authors: AUTHORS.rst
+
+ Check `authors file`_.
+
+ .. _authors file: AUTHORS.rst 
