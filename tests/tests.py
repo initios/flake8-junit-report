@@ -94,13 +94,13 @@ class JunitConversorCliTest(TestCase):
         result = self.runner.invoke(conversion, [])
 
         self.assertEqual(2, result.exit_code)
-        self.assertIn('Missing argument "source"', result.output)
+        self.assertTrue('Missing argument "source"' in result.output)
 
     def test_should_fail_if_destination_file_is_not_given(self):
         result = self.runner.invoke(conversion, [failed_flake8])
 
         self.assertEqual(2, result.exit_code)
-        self.assertIn('Missing argument "destination', result.output)
+        self.assertTrue('Missing argument "destination' in result.output)
 
     def test_should_make_a_simple_conversion(self):
         with self.runner.isolated_filesystem():
