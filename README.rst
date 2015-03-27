@@ -46,4 +46,5 @@ Running the tests
 
 Contributions
 -------------
-.. _Authors: AUTHORS.rst 
+.. _Authors: AUTHORS.rst
+ 
