@@ -35,13 +35,17 @@ setuptools.setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.4',
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: BSD License',
     ],
 
-    packages=[
-        'junit_conversor',
+    py_modules=['junit_conversor.cli'],
+    install_requires=[
+        'Click',
     ],
-    include_package_data=True,
-    scripts=['bin/junit_conversor']
+    entry_points='''
+        [console_scripts]
+        junit_conversor=junit_conversor.cli:conversion
+    ''',
+
 )

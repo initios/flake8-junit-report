@@ -4,6 +4,10 @@ Simple tool that converts a flake8 file to junit format.
 Use it on your CI server to see the flake8 failures with ease.
 
 .. image:: https://img.shields.io/badge/LICENSE-BSD%203--Clause-brightgreen.svg
+.. image:: https://readthedocs.org/projects/flake8-junit-report/badge/?version=latest
+    :target: https://readthedocs.org/projects/flake8-junit-report/?badge=latest
+    :alt: Documentation Status
+
 
 .. list-table::
 
@@ -38,4 +42,12 @@ Running the tests
 .. code:: shell-session
 
     $ pip install -r requirements_dev.txt
-    $ tox
+    $ nosetests
+
+Contributions
+-------------
+.. _Authors: AUTHORS.rst
+
+ Check `authors file`_.
+
+ .. _authors file: AUTHORS.rst 
