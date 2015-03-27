@@ -1,4 +1,5 @@
 import xml.etree.cElementTree as ET
+import sys
 from collections import defaultdict
 
 
@@ -43,7 +44,11 @@ def _convert(origin, destination):
         for error in errors:
             ET.SubElement(testcase, "failure", file=error['file'], line=error['line'], col=error['col'],
                           message=error['detail'], type="flake8 %s" % error['code']) \
-                          .text = "{}:{} {}".format(error['line'], error['col'], error['detail'])
+                          .text = "{0}:{1} {2}".format(error['line'], error['col'], error['detail'])
 
     tree = ET.ElementTree(testsuite)
-    tree.write(destination, encoding='utf-8', xml_declaration=True)
+    if (2, 6) == sys.version_info[:2]:  # py26
+        tree.write(destination, encoding='utf-8')
+    else:
+        tree.write(destination, encoding='utf-8', xml_declaration=True)
+
