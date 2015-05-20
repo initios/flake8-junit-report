@@ -3,23 +3,24 @@ from collections import defaultdict
 
 
 def _parse(file_name):
-    lines = tuple(open(file_name, 'r'))
     parsed = defaultdict(list)
 
-    for line in lines:
-        splitted = line.split(":")
+    with open(file_name, 'rb') as f:
+        for line in f:
+            line = line.decode("utf-8")
+            splitted = line.split(":")
 
-        # Skip invalid lines
-        if len(splitted) == 4:
-            error = {
-                'file': splitted[0].strip(),
-                'line': splitted[1].strip(),
-                'col': splitted[2].strip(),
-                'detail': splitted[3].strip(),
-                'code': splitted[3].strip()[:4]
-            }
+            # Skip invalid lines
+            if len(splitted) == 4:
+                error = {
+                    'file': splitted[0].strip(),
+                    'line': splitted[1].strip(),
+                    'col': splitted[2].strip(),
+                    'detail': splitted[3].strip(),
+                    'code': splitted[3].strip()[:4]
+                }
 
-            parsed[error['file']].append(error)
+                parsed[error['file']].append(error)
 
     return dict(parsed)
 
