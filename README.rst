@@ -49,6 +49,7 @@ Changelog
 ---------
 
 2015-07-28
+
 - Add version 2.x.x
 - Rolled back python cli to vanilla python
 - Renamed binary to flake8_junit
