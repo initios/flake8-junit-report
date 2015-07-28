@@ -5,7 +5,8 @@ install:
 script:
     - tox
 after_script:
-    - mv toxresults/* testresults/
+    - mkdir -p build/logs
+    - mv toxresults/* build/logs/
 env:
     - TOXENV=py26
     - TOXENV=py27
