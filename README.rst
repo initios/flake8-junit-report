@@ -42,7 +42,7 @@ Running the tests
 .. code:: shell-session
 
     $ pip install -r requirements_dev.txt
-    $ nosetests
+    $ tox
 
 
 Changelog
