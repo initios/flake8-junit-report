@@ -2,9 +2,7 @@ import os
 import unittest
 import xml.dom.minidom
 
-from click.testing import CliRunner
 from junit_conversor import _parse, _convert
-from junit_conversor.cli import conversion
 
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
@@ -87,26 +85,26 @@ class ConvertTest(TestCase):
         self.assertFileDoesNotExist(self.destination)
 
 
-class JunitConversorCliTest(TestCase):
-    runner = CliRunner()
-
-    def test_should_fail_if_source_file_is_not_given(self):
-        result = self.runner.invoke(conversion, [])
-
-        self.assertEqual(2, result.exit_code)
-        self.assertTrue('Missing argument "source"' in result.output)
-
-    def test_should_fail_if_destination_file_is_not_given(self):
-        result = self.runner.invoke(conversion, [failed_flake8])
-
-        self.assertEqual(2, result.exit_code)
-        self.assertTrue('Missing argument "destination' in result.output)
-
-    def test_should_make_a_simple_conversion(self):
-        with self.runner.isolated_filesystem():
-            result = self.runner.invoke(conversion, [failed_flake8, 'result.xml'])
-
-            self.assertEqual(0, result.exit_code)
-            self.assertEqual('Conversion done\n', result.output)
-            self.assertFileExist('result.xml')
-            self.assertXmlIsValid('result.xml')
+# class JunitConversorCliTest(TestCase):
+#     runner = CliRunner()
+#
+#     def test_should_fail_if_source_file_is_not_given(self):
+#         result = self.runner.invoke(conversion, [])
+#
+#         self.assertEqual(2, result.exit_code)
+#         self.assertTrue('Missing argument "source"' in result.output)
+#
+#     def test_should_fail_if_destination_file_is_not_given(self):
+#         result = self.runner.invoke(conversion, [failed_flake8])
+#
+#         self.assertEqual(2, result.exit_code)
+#         self.assertTrue('Missing argument "destination' in result.output)
+#
+#     def test_should_make_a_simple_conversion(self):
+#         with self.runner.isolated_filesystem():
+#             result = self.runner.invoke(conversion, [failed_flake8, 'result.xml'])
+#
+#             self.assertEqual(0, result.exit_code)
+#             self.assertEqual('Conversion done\n', result.output)
+#             self.assertFileExist('result.xml')
+#             self.assertXmlIsValid('result.xml')
