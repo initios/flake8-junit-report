@@ -4,9 +4,12 @@ install:
     - pip install tox
 script:
     - tox
+after_script:
+    - mv toxresults/* testresults/
 env:
     - TOXENV=py26
     - TOXENV=py27
     - TOXENV=py34
+    - TOXENV=flake8
 after_success:
     - coveralls
