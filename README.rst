@@ -34,7 +34,7 @@ Convert it to JUnit format:
 
 .. code:: shell-session
 
-    $ junit_conversor flake8.txt flake8_junit.xml
+    $ flake8_junit flake8.txt flake8_junit.xml
 
 Running the tests
 -----------------
@@ -42,7 +42,18 @@ Running the tests
 .. code:: shell-session
 
     $ pip install -r requirements_dev.txt
-    $ nosetests
+    $ tox
+
+
+Changelog
+---------
+
+2015-07-28
+
+- Add version 2.x.x
+- Rolled back python cli to vanilla python
+- Renamed binary to flake8_junit
+
 
 Contributions
 -------------
@@ -50,4 +61,4 @@ Contributions
 
  Check `authors file`_.
 
- .. _authors file: AUTHORS.rst 
+ .. _authors file: AUTHORS.rst

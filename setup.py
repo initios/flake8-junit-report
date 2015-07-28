@@ -40,13 +40,10 @@ setuptools.setup(
         'License :: OSI Approved :: BSD License',
     ],
 
-    py_modules=['junit_conversor.cli'],
-    install_requires=[
-        'Click',
+    packages=[
+        'junit_conversor',
     ],
-    entry_points='''
-        [console_scripts]
-        junit_conversor=junit_conversor.cli:conversion
-    ''',
+    include_package_data=True,
+    scripts=['bin/flake8_junit']
 
 )
