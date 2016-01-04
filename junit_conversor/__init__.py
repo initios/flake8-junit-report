@@ -28,13 +28,10 @@ def _parse(file_name):
 def _convert(origin, destination):
     parsed = _parse(origin)
 
-    if len(parsed) < 1:
-        return
-
     testsuite = ET.Element("testsuite")
     testsuite.attrib["errors"] = str(len(parsed))
     testsuite.attrib["failures"] = "0"
-    testsuite.attrib["name"] = "flake8 failures"
+    testsuite.attrib["name"] = "flake8"
     testsuite.attrib["tests"] = str(len(parsed))
     testsuite.attrib["time"] = "1"
 
