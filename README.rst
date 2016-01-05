@@ -48,6 +48,11 @@ Running the tests
 Changelog
 ---------
 
+2016-01-05
+
+- Flake8 file now is always generated, even when there are no errors
+
+
 2015-07-28
 
 - Add version 2.x.x
