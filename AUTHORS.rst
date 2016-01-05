@@ -7,6 +7,7 @@ flake8-junit-report is written and maintained by `Carlos Goce
 Contributors
 ------------
 
+- `Jeroen Op 't Eynde <https://github.com/Duologic>`
 - `Marko Tibold <https://github.com/markotibold>`
 - `Miguel González <https://github.com/migonzalvar>`
 

@@ -28,27 +28,32 @@ def _parse(file_name):
 def _convert(origin, destination):
     parsed = _parse(origin)
 
-    if len(parsed) < 1:
-        return
-
     testsuite = ET.Element("testsuite")
     testsuite.attrib["errors"] = str(len(parsed))
     testsuite.attrib["failures"] = "0"
-    testsuite.attrib["name"] = "flake8 failures"
-    testsuite.attrib["tests"] = str(len(parsed))
+    testsuite.attrib["name"] = "flake8"
+    testsuite.attrib["tests"] = str(len(parsed)) or "1"
     testsuite.attrib["time"] = "1"
 
     for file_name, errors in parsed.items():
         testcase = ET.SubElement(testsuite, "testcase", name=file_name)
 
         for error in errors:
-            ET.SubElement(testcase, "failure", file=error['file'], line=error['line'], col=error['col'],
-                          message=error['detail'], type="flake8 %s" % error['code']) \
-                          .text = "{0}:{1} {2}".format(error['line'], error['col'], error['detail'])
+            kargs = {
+                "file": error['file'],
+                "line": error['line'],
+                "col": error['col'],
+                "message": error['detail'],
+                "type": "flake8 %s" % error['code']
+            }
+
+            text = "{0}:{1} {2}".format(error['line'], error['col'], error['detail'])
+
+            ET.SubElement(testcase, "failure", **kargs).text = text
 
     tree = ET.ElementTree(testsuite)
+
     if (2, 6) == sys.version_info[:2]:  # py26
         tree.write(destination, encoding='utf-8')
     else:
         tree.write(destination, encoding='utf-8', xml_declaration=True)
-

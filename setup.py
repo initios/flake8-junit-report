@@ -33,19 +33,17 @@ setuptools.setup(
 
     classifiers=[
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.4',
         'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: BSD License',
     ],
 
-    py_modules=['junit_conversor.cli'],
-    install_requires=[
-        'Click',
+    packages=[
+        'junit_conversor',
     ],
-    entry_points='''
-        [console_scripts]
-        junit_conversor=junit_conversor.cli:conversion
-    ''',
+    include_package_data=True,
+    scripts=['bin/flake8_junit']
 
 )
