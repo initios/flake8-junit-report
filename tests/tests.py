@@ -80,10 +80,6 @@ class ConvertTest(TestCase):
         self.assertFileExist(self.destination)
         self.assertXmlIsValid(self.destination)
 
-    def test_should_not_create_a_file_if_there_are_no_errors(self):
-        _convert(valid_flake8, self.destination)
-        self.assertFileDoesNotExist(self.destination)
-
 
 # class JunitConversorCliTest(TestCase):
 #     runner = CliRunner()
