@@ -60,7 +60,6 @@ Changelog
 - Renamed binary to flake8_junit
 
 
-Contributions
 -------------
 
-`Contributors <https://github.com/initios/flake8-junit-report/graphs/contributors>`_
+`CONTRIBUTORS <https://github.com/initios/flake8-junit-report/graphs/contributors>`_
