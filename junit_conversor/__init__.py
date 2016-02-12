@@ -8,7 +8,7 @@ def _parse(file_name):
     parsed = defaultdict(list)
 
     for line in lines:
-        splitted = line.split(":")
+        splitted = line.split(":", 3)
 
         # Skip invalid lines
         if len(splitted) == 4:
