@@ -62,8 +62,5 @@ Changelog
 
 Contributions
 -------------
-.. _Authors: AUTHORS.rst
 
- Check `authors file`_.
-
- .. _authors file: AUTHORS.rst
+`Contributors <https://github.com/initios/flake8-junit-report/graphs/contributors>`_
