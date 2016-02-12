@@ -60,10 +60,6 @@ Changelog
 - Renamed binary to flake8_junit
 
 
-Contributions
 -------------
-.. _Authors: AUTHORS.rst
 
- Check `authors file`_.
-
- .. _authors file: AUTHORS.rst
+`CONTRIBUTORS <https://github.com/initios/flake8-junit-report/graphs/contributors>`_
