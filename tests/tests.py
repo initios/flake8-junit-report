@@ -45,6 +45,7 @@ class ParseTest(TestCase):
             ],
             "tests/subject/example.py": [
                 {"file": "tests/subject/example.py", "line": "4", "col": "1", "detail": "E302 expected 2 blank lines, found 1", "code": "E302"},
+                {"file": "tests/subject/example.py", "line": "16", "col": "22", "detail": "E203 whitespace before ':'", "code": "E203"},
             ]
         })
 

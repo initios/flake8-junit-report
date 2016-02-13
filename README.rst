@@ -48,6 +48,12 @@ Running the tests
 Changelog
 ---------
 
+2016-02-13
+
+- Fix bug
+- Add version 2.0.1
+
+
 2016-01-05
 
 - Flake8 file now is always generated, even when there are no errors
@@ -60,10 +66,6 @@ Changelog
 - Renamed binary to flake8_junit
 
 
-Contributions
 -------------
-.. _Authors: AUTHORS.rst
 
- Check `authors file`_.
-
- .. _authors file: AUTHORS.rst
+`CONTRIBUTORS <https://github.com/initios/flake8-junit-report/graphs/contributors>`_
