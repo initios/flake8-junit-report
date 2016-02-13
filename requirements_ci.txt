@@ -1,2 +1,2 @@
 -r requirements_dev.txt
-flake8-junit-report==2.0.1
+flake8-junit-report==2.0.0
