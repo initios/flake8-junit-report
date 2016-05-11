@@ -48,6 +48,11 @@ Running the tests
 Changelog
 ---------
 
+2016-05-11 **2.1.0**
+
+- Change setuptools `scripts` to `console scripts`.
+Now it should works on Windows 
+
 2016-02-13
 
 - Fix bug
