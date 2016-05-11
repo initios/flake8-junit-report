@@ -44,6 +44,9 @@ setuptools.setup(
         'junit_conversor',
     ],
     include_package_data=True,
-    scripts=['bin/flake8_junit']
-
+    entry_points={
+        'console_scripts': [
+            'flake8_junit = junit_conversor.__main__:main',
+        ],
+    }
 )
