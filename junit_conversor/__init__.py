@@ -1,11 +1,10 @@
-import xml.etree.cElementTree as ET
 import sys
-from collections import defaultdict
+import xml.etree.cElementTree as ET
 
 
 def _parse(file_name):
     lines = tuple(open(file_name, 'r'))
-    parsed = defaultdict(list)
+    parsed = {}
 
     for line in lines:
         splitted = line.split(":", 3)
@@ -20,7 +19,8 @@ def _parse(file_name):
                 'code': splitted[3].strip()[:4]
             }
 
-            parsed[error['file']].append(error)
+            case_name = '{file}:{line}:{col}:'.format(file=error['file'], line=error['line'], col=error['col'])
+            parsed[case_name] = error
 
     return dict(parsed)
 
@@ -35,21 +35,19 @@ def _convert(origin, destination):
     testsuite.attrib["tests"] = str(len(parsed)) or "1"
     testsuite.attrib["time"] = "1"
 
-    for file_name, errors in parsed.items():
-        testcase = ET.SubElement(testsuite, "testcase", name=file_name)
+    for case_name, error in parsed.items():
+        testcase = ET.SubElement(testsuite, "testcase", name=case_name)
+        kargs = {
+            "file": error['file'],
+            "line": error['line'],
+            "col": error['col'],
+            "message": error['detail'],
+            "type": "flake8 %s" % error['code']
+        }
 
-        for error in errors:
-            kargs = {
-                "file": error['file'],
-                "line": error['line'],
-                "col": error['col'],
-                "message": error['detail'],
-                "type": "flake8 %s" % error['code']
-            }
+        text = "{0}:{1} {2}".format(error['line'], error['col'], error['detail'])
 
-            text = "{0}:{1} {2}".format(error['line'], error['col'], error['detail'])
-
-            ET.SubElement(testcase, "failure", **kargs).text = text
+        ET.SubElement(testcase, "failure", **kargs).text = text
 
     tree = ET.ElementTree(testsuite)
 
