@@ -39,14 +39,14 @@ class ParseTest(TestCase):
         parsed = _parse(failed_flake8)
 
         self.assertEqual(parsed, {
-            "tests/subject/__init__.py": [
+            "tests/subject/__init__.py:1:1:":
                 {"file": "tests/subject/__init__.py", "line": "1", "col": "1", "detail": "F401 'os' imported but unused", "code": "F401"},
+            "tests/subject/__init__.py:3:1:":
                 {"file": "tests/subject/__init__.py", "line": "3", "col": "1", "detail": "E302 expected 2 blank lines, found 1", "code": "E302"},
-            ],
-            "tests/subject/example.py": [
+            "tests/subject/example.py:4:1:":
                 {"file": "tests/subject/example.py", "line": "4", "col": "1", "detail": "E302 expected 2 blank lines, found 1", "code": "E302"},
+            "tests/subject/example.py:16:22:":
                 {"file": "tests/subject/example.py", "line": "16", "col": "22", "detail": "E203 whitespace before ':'", "code": "E203"},
-            ]
         })
 
     def test_should_return_an_empty_dict_when_parsing_a_flake8_success_file(self):
@@ -56,13 +56,12 @@ class ParseTest(TestCase):
         parsed = _parse(failed_flake8_with_invalid_lines)
 
         self.assertEqual(parsed, {
-            "tests/subject/__init__.py": [
+            "tests/subject/__init__.py:1:1:":
                 {"file": "tests/subject/__init__.py", "line": "1", "col": "1", "detail": "F401 'os' imported but unused", "code": "F401"},
+            "tests/subject/__init__.py:3:1:":
                 {"file": "tests/subject/__init__.py", "line": "3", "col": "1", "detail": "E302 expected 2 blank lines, found 1", "code": "E302"},
-            ],
-            "tests/subject/example.py": [
+            "tests/subject/example.py:4:1:":
                 {"file": "tests/subject/example.py", "line": "4", "col": "1", "detail": "E302 expected 2 blank lines, found 1", "code": "E302"},
-            ]
         })
 
 
