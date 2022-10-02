@@ -14,3 +14,4 @@ __pycache__/
 
 # Tests results
 *result.xml
+coverage.xml
