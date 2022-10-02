@@ -1,5 +1,4 @@
 import os
-import unittest
 
 from junit_conversor import _parse
 

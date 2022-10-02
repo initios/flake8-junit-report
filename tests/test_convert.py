@@ -30,7 +30,7 @@ def assertFileExist(file_name):
 
 
 def assertFileDoesNotExist(file_name):
-    assert os.path.exists(file_name) == False, "File %s exist" % file_name
+    assert not os.path.exists(file_name), "File %s exist" % file_name
 
 
 @pytest.fixture
