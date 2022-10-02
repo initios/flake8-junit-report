@@ -1,0 +1,1 @@
+exclude = .git, .virtualenv, .venv, venv, __pycache__. tox
