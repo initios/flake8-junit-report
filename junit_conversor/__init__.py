@@ -36,20 +36,23 @@ def _convert(origin, destination):
     testsuite.attrib["time"] = "1"
 
     for file_name, errors in parsed.items():
-        testcase = ET.SubElement(testsuite, "testcase", name=file_name)
 
         for error in errors:
-            kargs = {
-                "file": error['file'],
-                "line": error['line'],
-                "col": error['col'],
+            kargs_failure = {
+                "file": file_name,
                 "message": error['detail'],
                 "type": "flake8 %s" % error['code']
             }
+            kargs_testcase = {
+                "name": "{0}:{1} {2}".format(error['line'], error['col'], error['detail']),
+                "line": error['line'],
+                "col": error['col'],
+                "file": file_name,
+            }
 
-            text = "{0}:{1} {2}".format(error['line'], error['col'], error['detail'])
-
-            ET.SubElement(testcase, "failure", **kargs).text = text
+            testcase = ET.SubElement(testsuite, "testcase", **kargs_testcase)
+            text = "{0} {1}:{2} {3}".format(file_name, error['line'], error['col'], error['detail'])
+            ET.SubElement(testcase, "failure", **kargs_failure).text = text
 
     tree = ET.ElementTree(testsuite)
 
