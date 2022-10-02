@@ -1,3 +1,13 @@
+# Python
 .coverage
 tests/output/*
 toxresults
+.venv/
+dist/
+*egg-info/
+__pycache__/
+.tox/
+.pytest_cache/
+
+# Visual Studio Code settings
+.vscode/
