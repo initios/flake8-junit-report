@@ -69,4 +69,4 @@ Now it should works on Windows
 
 -------------
 
-`CONTRIBUTORS <https://github.com/initios/flake8-junit-report/graphs/contributors>`_
+`CONTRIBUTORS <https://github.com/ricardogarfe/flake8-junit-report/graphs/contributors>`_
