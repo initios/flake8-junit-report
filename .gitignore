@@ -11,3 +11,6 @@ __pycache__/
 
 # Visual Studio Code settings
 .vscode/
+
+# Tests results
+*result.xml
