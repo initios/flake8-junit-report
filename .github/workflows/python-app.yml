@@ -38,4 +38,10 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Unit Tests
       run: |
-        coverage run -m pytest
+        coverage run -m pytest test/ --junitxml="unit-test-result.xml"
+    - name: Test Summary
+      uses: test-summary/action@v1
+      with:
+        paths: |
+          unit-test-result.xml
+      if: always()
