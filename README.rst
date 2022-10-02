@@ -12,15 +12,11 @@ Use it on your CI server to see the flake8 failures with ease.
 .. list-table::
 
     * - Master
-      - .. image:: https://travis-ci.org/initios/flake8-junit-report.svg?branch=master
-            :target: https://travis-ci.org/initios/flake8-junit-report
-      - .. image:: https://coveralls.io/repos/initios/flake8-junit-report/badge.svg?branch=master
-            :target: https://coveralls.io/r/initios/flake8-junit-report?branch=master
+      - [![Flake8 Junit Report testing](https://github.com/ricardogarfe/flake8-junit-report/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/ricardogarfe/flake8-junit-report/actions/workflows/python-app.yml)
+      - [![codecov](https://codecov.io/gh/ricardogarfe/flake8-junit-report/branch/master/graph/badge.svg)](https://codecov.io/gh/ricardogarfe/flake8-junit-report)
     * - Develop
-      - .. image:: https://travis-ci.org/initios/flake8-junit-report.svg?branch=develop
-            :target: https://travis-ci.org/initios/flake8-junit-report
-      - .. image:: https://coveralls.io/repos/initios/flake8-junit-report/badge.svg?branch=develop
-            :target: https://coveralls.io/r/initios/flake8-junit-report?branch=develop
+      - [![Flake8 Junit Report testing](https://github.com/ricardogarfe/flake8-junit-report/actions/workflows/python-app.yml/badge.svg?branch=develop)](https://github.com/ricardogarfe/flake8-junit-report/actions/workflows/python-app.yml)
+      - [![codecov](https://codecov.io/gh/ricardogarfe/flake8-junit-report/branch/develop/graph/badge.svg)](https://codecov.io/gh/ricardogarfe/flake8-junit-report)
 
 Usage
 -----
