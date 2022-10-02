@@ -26,6 +26,7 @@ install-dev-dependencies: ## Install dev dependencies
 
 test-unit: ## Run unit tests
 	coverage run -m pytest --junitxml="unit-test-result.xml"
+	coverage xml
 
 black: ## Apply auto lint changes using black
 	black --check . -l 127 --exclude .venv/
