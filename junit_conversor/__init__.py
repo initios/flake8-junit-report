@@ -51,8 +51,4 @@ def _convert(origin, destination):
             ET.SubElement(testcase, "failure", **kargs_failure).text = text
 
     tree = ET.ElementTree(testsuite)
-
-    if (2, 6) == sys.version_info[:2]:  # py26
-        tree.write(destination, encoding="utf-8")
-    else:
-        tree.write(destination, encoding="utf-8", xml_declaration=True)
+    tree.write(destination, encoding="utf-8", xml_declaration=True)
