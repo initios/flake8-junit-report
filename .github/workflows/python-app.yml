@@ -39,6 +39,8 @@ jobs:
     - name: Unit Tests
       run: |
         coverage run -m pytest --junitxml="unit-test-result.xml"
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
     - name: Test Summary
       uses: test-summary/action@v1
       with:
